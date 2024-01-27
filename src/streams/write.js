@@ -18,9 +18,6 @@ const write = async () => {
     process.stdout.write('Good bye! \n');
     process.exit();
   });
-  process.stdin.on('end', () => {
-    
-  });
 };
 
 await write();
