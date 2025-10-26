@@ -9,3 +9,4 @@ const parseArgs = () => {
 };
 
 parseArgs();
+
