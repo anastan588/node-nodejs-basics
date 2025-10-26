@@ -8,11 +8,16 @@ const scriptPath = path.join(__dirname, 'files', 'script.js');
 
 const spawnChildProcess = async (args) => {
   const childProcess = spawn('node', [scriptPath, ...args], {
-    stdio: ['pipe', 'pipe', process.stdout],
+    stdio: ['pipe', 'pipe', 'pipe'],
   });
   process.stdin.pipe(childProcess.stdin);
+
   childProcess.stdout.pipe(process.stdout);
+  childProcess.stderr.pipe(process.stderr);
+
+  childProcess.on('exit', (code) => {
+    console.log(`Child process exited with code ${code}`);
+  });
 };
 
-// Put your arguments in function call to test this functionality
 spawnChildProcess(['winter', 'spring', 'summer', 'autumn']);

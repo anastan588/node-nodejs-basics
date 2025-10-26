@@ -13,10 +13,11 @@ const list = async () => {
     } else {
       fs.readdir(folderPath, (error, files) => {
         if (error) return console.log(error);
-        const arrayOfFileNames = []
+        const arrayOfFileNames = [];
         files.forEach((file) => {
           arrayOfFileNames.push(file.valueOf());
         });
+        console.log(`Files in files folder:`);
         console.log(arrayOfFileNames);
       });
     }
@@ -24,4 +25,3 @@ const list = async () => {
 };
 
 await list();
-

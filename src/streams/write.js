@@ -10,12 +10,23 @@ const write = async () => {
   const stream = fs.createWriteStream(fileToWrite, { flags: 'a' });
   process.stdin.on('data', (data) => {
     let information = data.toString().trim();
+    if (information.toLowerCase() === 'exit') {
+      process.stdin.emit('end');
+      return;
+    }
     stream.write(`${information}\n`);
   });
   process.stdin.on('end', () => {
     stream.end();
+    console.log(
+      `Finished writing to fileToWrite.txt. All data has been saved.`
+    );
+  });
+  process.on('SIGINT', () => {
+    stream.end();
+    console.log(`\nProcess interrupted. Data has been saved up to this point.`);
+    process.exit();
   });
 };
 
 await write();
-

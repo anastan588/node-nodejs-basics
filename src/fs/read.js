@@ -11,13 +11,12 @@ const read = async () => {
     if (err) {
       console.log("FS operation failed: File 'fileToRead.txt' doesn't exist");
     } else {
-        fs.readFile(filePathToRead, 'utf-8', (error, data) => {
-            if (error) return console.log(error); 
-            console.log(data);
-          });;
+      fs.readFile(filePathToRead, 'utf-8', (error, data) => {
+        if (error) return console.log(error);
+        console.log(data);
+      });
     }
   });
 };
 
 await read();
-
